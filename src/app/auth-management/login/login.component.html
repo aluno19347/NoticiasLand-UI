@@ -1,0 +1,56 @@
+<mat-card>
+    <mat-card-title>Noticias Land UI</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <p>
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
+                        placeholder="Username"
+                        formControlName="username"
+                    />
+                    <mat-error *ngIf="username.hasError('required')">
+                        Field required.
+                    </mat-error>
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field>
+                    <input
+                        type="password"
+                        matInput
+                        placeholder="Password"
+                        formControlName="password"
+                    />
+                    <mat-error *ngIf="password.hasError('required')">
+                        Field required.
+                    </mat-error>
+                </mat-form-field>
+            </p>
+
+            <button
+                class="login-btn"
+                type="submit"
+                [disabled]="form.invalid"
+                [style.cursor]="form.invalid ? 'no-drop' : 'pointer'"
+                mat-button
+            >
+                Login
+            </button>
+
+            <p class="message">
+                Not Registered?
+                <a routerLink="/register">Create an account</a>
+            </p>
+            <p class="message">
+                <a>Forgot password?</a>
+            </p>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<div *ngIf="loading" class="loading-overlay">
+    <mat-spinner class="loading-spinner"></mat-spinner>
+</div>

@@ -1,0 +1,77 @@
+<mat-card>
+    <mat-card-title>Noticias land account</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <p>
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
+                        placeholder="Name"
+                        formControlName="name"
+                    />
+                    <mat-error *ngIf="name.hasError('required')">
+                        Field required.
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
+                        placeholder="Email"
+                        formControlName="email"
+                    />
+                    <mat-error *ngIf="email.hasError('required')">
+                        Field required.
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <div formGroupName="passwords">
+                <p>
+                    <mat-form-field>
+                        <input
+                            type="password"
+                            matInput
+                            placeholder="Password"
+                            formControlName="password"
+                        />
+                        <mat-error *ngIf="password.hasError('required')">
+                            Field required.
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <mat-form-field>
+                        <input
+                            type="password"
+                            matInput
+                            placeholder="Confirm password"
+                            formControlName="passwordConfirmation"
+                            [errorStateMatcher]="errorMatcher"
+                        />
+                        <mat-error *ngIf="passwordsGroup.hasError('notSame')">
+                            Password confirmation does not match password.
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+            </div>
+
+            <button
+                class="login-btn"
+                type="submit"
+                [disabled]="form.invalid"
+                [style.cursor]="form.invalid ? 'no-drop' : 'pointer'"
+                mat-button
+            >
+                Register
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+<div *ngIf="loading" class="loading-overlay">
+    <mat-spinner class="loading-spinner"></mat-spinner>
+</div>

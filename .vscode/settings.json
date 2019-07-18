@@ -1,0 +1,6 @@
+{
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "tslint.rulesDirectory": "./node_modules/codelyzer",
+    "typescript.tsdk": "node_modules/typescript/lib"
+}
