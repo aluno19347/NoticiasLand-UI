@@ -20,6 +20,28 @@
                     <input
                         type="text"
                         matInput
+                        placeholder="Username"
+                        formControlName="username"
+                    />
+                    <mat-error *ngIf="username.hasError('required')">
+                        Field required.
+                    </mat-error>
+                    <mat-error *ngIf="username.hasError('pattern')">
+                        Only alphanumeric, space and underscore are allowed
+                    </mat-error>
+                    <mat-error *ngIf="username.hasError('maxLength')">
+                        Only 24 characters allowed
+                    </mat-error>
+                    <mat-error *ngIf="username.hasError('minLength')">
+                        Username requires at least 6 characters
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field>
+                    <input
+                        type="text"
+                        matInput
                         placeholder="Email"
                         formControlName="email"
                     />
@@ -52,6 +74,9 @@
                             formControlName="passwordConfirmation"
                             [errorStateMatcher]="errorMatcher"
                         />
+                        <mat-error *ngIf="password.hasError('required')">
+                            Field required.
+                        </mat-error>
                         <mat-error *ngIf="passwordsGroup.hasError('notSame')">
                             Password confirmation does not match password.
                         </mat-error>

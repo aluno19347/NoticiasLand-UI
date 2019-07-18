@@ -13,6 +13,15 @@
                     <mat-error *ngIf="username.hasError('required')">
                         Field required.
                     </mat-error>
+                    <mat-error *ngIf="username.hasError('pattern')">
+                        Only alphanumeric, space and underscore are allowed
+                    </mat-error>
+                    <mat-error *ngIf="username.hasError('maxLength')">
+                        Only 24 characters allowed
+                    </mat-error>
+                    <mat-error *ngIf="username.hasError('minLength')">
+                        Username requires at least 6 characters
+                    </mat-error>
                 </mat-form-field>
             </p>
 

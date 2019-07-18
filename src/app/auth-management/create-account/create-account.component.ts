@@ -19,11 +19,17 @@ export class CreateAccountComponent {
 
     form: FormGroup = new FormGroup({
         name: new FormControl('', Validators.required),
-        email: new FormControl('', Validators.required),
+        username: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[a-zA-Z0-9 _-]*'),
+            Validators.maxLength(24),
+            Validators.minLength(6)
+        ]),
+        email: new FormControl('', [Validators.required, Validators.email]),
         passwords: new FormGroup(
             {
                 password: new FormControl('', Validators.required),
-                passwordConfirmation: new FormControl('')
+                passwordConfirmation: new FormControl('', Validators.required)
             },
             [this._checkPasswords]
         )
@@ -35,6 +41,10 @@ export class CreateAccountComponent {
 
     get name(): AbstractControl {
         return this.form.get('name');
+    }
+
+    get username(): AbstractControl {
+        return this.form.get('username');
     }
 
     get password(): AbstractControl {
@@ -59,14 +69,9 @@ export class CreateAccountComponent {
         };
 
         this.loading = true;
-        // .subscribe(result => {
-        //     this.loading = false;
-        //     console.log('result ', result);
-        // });
     }
 
     private _checkPasswords(group: FormGroup): { [key: string]: any } | null {
-        console.log('group ', group);
         if (
             !group.controls.password.touched ||
             !group.controls.passwordConfirmation.touched

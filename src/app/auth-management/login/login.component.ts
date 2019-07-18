@@ -16,8 +16,17 @@ export class LoginComponent {
     loading = false;
 
     form: FormGroup = new FormGroup({
-        username: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required)
+        username: new FormControl('', [
+            Validators.required,
+            Validators.pattern('[a-zA-Z0-9 _-]*'),
+            Validators.maxLength(24),
+            Validators.minLength(6)
+        ]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(24),
+            Validators.minLength(6)
+        ])
     });
 
     get username(): AbstractControl {
